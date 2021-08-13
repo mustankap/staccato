@@ -1,3 +1,3 @@
-# staccato (final year project)
+# Staccato (final year project)
 
 ## Audio system using DRL
