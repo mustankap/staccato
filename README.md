@@ -11,3 +11,5 @@
 [MFCC](https://towardsdatascience.com/learning-from-audio-the-mel-scale-mel-spectrograms-and-mel-frequency-cepstral-coefficients-f5752b6324a8)
 
 [Librosa - MFCC](https://librosa.org/doc/latest/generated/librosa.feature.mfcc.html#librosa.feature.mfcc)
+
+[GRU | LSTM](https://www.kaggle.com/thebrownviking20/intro-to-recurrent-neural-networks-lstm-gru)
