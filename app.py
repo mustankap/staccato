@@ -430,7 +430,7 @@ def main():
         st.write("Since we are currently using a free tier instance of AWS, "
                  "we disabled mel-spec and ensemble models.\n\n"
                  "If you want to try them we recommend to clone our GitHub repo")
-        st.code("git clone https://github.com/CyberMaryVer/speech-emotion-webapp.git", language='bash')
+        st.code("git clone https://github.com/mustankap/staccato.git", language='bash')
 
         st.write("After that, just uncomment the relevant sections in the app.py file "
                  "to use these models:")
@@ -440,17 +440,17 @@ def main():
         st.balloons()
         col1, col2 = st.columns([3, 2])
         with col1:
-            st.info("maria.s.startseva@gmail.com")
-            st.info("talbaram3192@gmail.com")
-            st.info("asherholder123@gmail.com")
+            st.info("mustankap@gmail.com")
+            st.info("deepkarma001@gmail.com")
+            st.info("vedantk07@gmail.com")
         with col2:
             liimg = Image.open("images/LI-Logo.png")
             st.image(liimg)
-            st.markdown(f""":speech_balloon: [Maria Startseva](https://www.linkedin.com/in/maria-startseva)""",
+            st.markdown(f""":speech_balloon: [Mustansir Kapasi](https://www.linkedin.com/in/mustankap)""",
                         unsafe_allow_html=True)
-            st.markdown(f""":speech_balloon: [Tal Baram](https://www.linkedin.com/in/tal-baram-b00b66180)""",
+            st.markdown(f""":speech_balloon: [Arghyadeep Karmakar](https://www.linkedin.com/in/arghyadeep-k-14b06b15a/)""",
                         unsafe_allow_html=True)
-            st.markdown(f""":speech_balloon: [Asher Holder](https://www.linkedin.com/in/asher-holder-526a05173)""",
+            st.markdown(f""":speech_balloon: [Vedant Kokate](https://www.linkedin.com/in/vedant-kokate-723030182/)""",
                         unsafe_allow_html=True)
 
     elif website_menu == "Leave feedback":
