@@ -1,0 +1,22 @@
+- calm
+	- I don't think anything that bad can happen.
+	- Feel your feet on the ground. Notice where your legs are resting on the chair. The key is not to get stuck in your head
+	- First and foremost, breathe. By taking a few deep breaths, you can stay in your body and soul.
+- happy
+	- I have received a job offer from Google.
+- sad
+	- I am unemployed and have no friends.
+- angry
+	- How dare you talk to me like that!
+- fearful
+	- If she comes to know we will be in deep trouble.
+- disgust
+	- Why would anyone say such a thing.
+- surprised
+	- I never knew you all will come along till here.
+- anxious
+	- I dont know whether I will get an admit there or no
+- apologetic
+	- I am so sorry. I promise I will never do such a thing
+- enthusiastic
+- sleepy
