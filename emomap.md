@@ -1,22 +1,44 @@
-- 1. calm
+- neutral
+- calm
 	- I don't think anything that bad can happen.
 	- Feel your feet on the ground. Notice where your legs are resting on the chair. The key is not to get stuck in your head
 	- First and foremost, breathe. By taking a few deep breaths, you can stay in your body and soul.
-- 2. happy
+- happy
 	- I have received a job offer from Google.
-- 3. sad
+	- Congratulations! Its a baby boy!
+	- Many Many happy returns of the day.
+- sad
 	- I am unemployed and have no friends.
-- 4. angry
+	- He died alone in the ICU.
+	- I mess up everytime I try to do something new.
+- anger
 	- How dare you talk to me like that!
-- 5. fearful
+	- Do you think this is a joke?
+  	- This is not funny!
+- fear
 	- If she comes to know we will be in deep trouble.
-- 6. disgust
+	- Don't go on the third floor of the main building past 12 am.
+	- Many a times I see a silhouette in the dark.
+- disgust
+    - Yuck! Why would scientist do that to a frog?
 	- Why would anyone say such a thing.
-- 7. surprised
-	- I never knew you all will come along till here.
-- 8. anxious
-	- I dont know whether I will get an admit there or no
-- 9. apologetic
-	- I am so sorry. I promise I will never do such a thing
-- 10. enthusiastic
-- 11. sleepy
+	- Eww! Get that thing away from me.
+- surprise
+	- I never thought there would be these many guests.
+	- What the hell is going on?
+- anxious
+	- I don't know whether I will get an admit or not.
+	- I know I am going to fail.
+	- She ditched me, didn't she?
+- apologetic
+	- I am so sorry. I promise I will never do such a thing.
+	- Please forgive me.
+	- Can we be friends again?
+- enthusiastic
+    - I am so exited for today's party.
+    - We are gonna win today.
+    - Today's my birthday.
+- sleepy
+    - Did you need to wake me up this early?
+    - What do you need at this ungodly hour.
+    - 5 more minutes Mom!
