@@ -1,0 +1,44 @@
+- neutral
+- calm
+	- I don't think anything that bad can happen.
+	- Feel your feet on the ground. Notice where your legs are resting on the chair. The key is not to get stuck in your head
+	- First and foremost, breathe. By taking a few deep breaths, you can stay in your body and soul.
+- happy
+	- I have received a job offer from Google.
+	- Congratulations! Its a baby boy!
+	- Many Many happy returns of the day.
+- sad
+	- I am unemployed and have no friends.
+	- He died alone in the ICU.
+	- I mess up everytime I try to do something new.
+- anger
+	- How dare you talk to me like that!
+	- Do you think this is a joke?
+  	- This is not funny!
+- fear
+	- If she comes to know we will be in deep trouble.
+	- Don't go on the third floor of the main building past 12 am.
+	- Many a times I see a silhouette in the dark.
+- disgust
+    - Yuck! Why would scientist do that to a frog?
+	- Why would anyone say such a thing.
+	- Eww! Get that thing away from me.
+- surprise
+	- I never thought there would be these many guests.
+	- What the hell is going on?
+- anxious
+	- I don't know whether I will get an admit or not.
+	- I know I am going to fail.
+	- She ditched me, didn't she?
+- apologetic
+	- I am so sorry. I promise I will never do such a thing.
+	- Please forgive me.
+	- Can we be friends again?
+- enthusiastic
+    - I am so exited for today's party.
+    - We are gonna win today.
+    - Today's my birthday.
+- sleepy
+    - Did you need to wake me up this early?
+    - What do you need at this ungodly hour.
+    - 5 more minutes Mom!
