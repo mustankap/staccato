@@ -1,22 +1,22 @@
-- calm
+- 1. calm
 	- I don't think anything that bad can happen.
 	- Feel your feet on the ground. Notice where your legs are resting on the chair. The key is not to get stuck in your head
 	- First and foremost, breathe. By taking a few deep breaths, you can stay in your body and soul.
-- happy
+- 2. happy
 	- I have received a job offer from Google.
-- sad
+- 3. sad
 	- I am unemployed and have no friends.
-- angry
+- 4. angry
 	- How dare you talk to me like that!
-- fearful
+- 5. fearful
 	- If she comes to know we will be in deep trouble.
-- disgust
+- 6. disgust
 	- Why would anyone say such a thing.
-- surprised
+- 7. surprised
 	- I never knew you all will come along till here.
-- anxious
+- 8. anxious
 	- I dont know whether I will get an admit there or no
-- apologetic
+- 9. apologetic
 	- I am so sorry. I promise I will never do such a thing
-- enthusiastic
-- sleepy
+- 10. enthusiastic
+- 11. sleepy
