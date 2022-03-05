@@ -9,10 +9,10 @@ from datetime import datetime
 import streamlit.components.v1 as components
 import matplotlib.pyplot as plt
 from PIL import Image
-#from melspec import plot_colored_polar, plot_melspec
+from melspec import plot_colored_polar, plot_melspec
 
-# load models
-#model = load_model("model3.h5")
+#load models
+model = load_model("model3.h5")
 
 # constants
 starttime = datetime.now()
@@ -173,6 +173,7 @@ def main():
             col1, col2 = st.columns(2)
             # audio_file = None
             # path = None
+           
             with col1:
                 audio_file = st.file_uploader("Upload audio file", type=['wav', 'mp3', 'ogg'])
                 if audio_file is not None:
@@ -207,6 +208,21 @@ def main():
                         path = "test.wav"
                         audio_file = "test"
             with col2:
+                DURATION=60
+                if st.button('Record'):
+                    with st.spinner(f'Recording for {DURATION} seconds ....'):
+                        sound.record()
+                    st.success("Recording completed")
+
+                if st.button('Play'):
+                    # sound.play()
+                    try:
+                        audio_file = open(WAVE_OUTPUT_FILE, 'rb')
+                        audio_bytes = audio_file.read()
+                        st.audio(audio_bytes, format='audio/wav')
+                    except:
+                        st.write("Please record sound first")
+
                 if audio_file is not None:
                     fig = plt.figure(figsize=(10, 2))
                     fig.set_facecolor('#d1d1e0')
@@ -337,22 +353,22 @@ def main():
                             st.write(fig2)
                     with col3:
                         if em7:
-                            model_ = load_model("model4.h5")
+                            model_ = load_model("model3.h5")
                             mfccs_ = get_mfccs(path, model_.input_shape[-2])
                             mfccs_ = mfccs_.T.reshape(1, *mfccs_.T.shape)
                             pred_ = model_.predict(mfccs_)[0]
                             txt = "MFCCs\n" + get_title(pred_, CAT7)
                             fig3 = plt.figure(figsize=(5, 5))
                             COLORS = color_dict(COLOR_DICT)
-                            plot_colored_polar(fig3, predictions=pred_, categories=CAT7,
-                                               title=txt, colors=COLORS)
+                           # plot_colored_polar(fig3, predictions=pred_, categories=CAT7,
+                                               #title=txt, colors=COLORS)
                             # plot_polar(fig3, predictions=pred_, categories=CAT7,
                             #            title=txt, colors=COLORS)
                             st.write(fig3)
                     with col4:
                         if gender:
                             with st.spinner('Wait for it...'):
-                                gmodel = load_model("model_mw.h5")
+                                gmodel = load_model("model3.h5")
                                 gmfccs = get_mfccs(path, gmodel.input_shape[-1])
                                 gmfccs = gmfccs.reshape(1, *gmfccs.shape)
                                 gpred = gmodel.predict(gmfccs)[0]
@@ -415,10 +431,10 @@ def main():
             This web-application is a part of the final **Data Mining** project for **ITC Fellow Program 2020**. 
 
             Datasets used in this project
-            * Crowd-sourced Emotional Mutimodal Actors Dataset (**Crema-D**)
+            * Jesin James, Li Tian,(**JL-Corpus**)
             * Ryerson Audio-Visual Database of Emotional Speech and Song (**Ravdess**)
             * Surrey Audio-Visual Expressed Emotion (**Savee**)
-            * Toronto emotional speech set (**Tess**)    
+            * MELD F.R.I.E.N.D.S dialogs (**MELD**)    
             """
         st.markdown(txt, unsafe_allow_html=True)
 
