@@ -1,6 +1,7 @@
 import numpy as np
 import streamlit as st
 import cv2
+# from src.sound import sound
 import librosa
 import librosa.display
 from tensorflow.keras.models import load_model
@@ -209,19 +210,19 @@ def main():
                         audio_file = "test"
             with col2:
                 DURATION=60
-                if st.button('Record'):
-                    with st.spinner(f'Recording for {DURATION} seconds ....'):
-                        sound.record()
-                    st.success("Recording completed")
+                # if st.button('Record'):
+                #     with st.spinner(f'Recording for {DURATION} seconds ....'):
+                        # sound.record()
+                    # st.success("Recording completed")
 
-                if st.button('Play'):
+                # if st.button('Play'):
                     # sound.play()
-                    try:
-                        audio_file = open(WAVE_OUTPUT_FILE, 'rb')
-                        audio_bytes = audio_file.read()
-                        st.audio(audio_bytes, format='audio/wav')
-                    except:
-                        st.write("Please record sound first")
+                    # try:
+                    #     audio_file = open(WAVE_OUTPUT_FILE, 'rb')
+                    #     audio_bytes = audio_file.read()
+                    #     st.audio(audio_bytes, format='audio/wav')
+                    # except:
+                    #     st.write("Please record sound first")
 
                 if audio_file is not None:
                     fig = plt.figure(figsize=(10, 2))
@@ -238,13 +239,13 @@ def main():
                     st.write(fig)
                 else:
                     pass
-            #     st.write("Record audio file")
-            #     if st.button('Record'):
-            #         with st.spinner(f'Recording for 5 seconds ....'):
-            #             st.write("Recording...")
-            #             time.sleep(3)
-            #         st.success("Recording completed")
-            #         st.write("Error while loading the file")
+                st.write("Record audio file")
+                if st.button('Record'):
+                    with st.spinner(f'Recording for 5 seconds ....'):
+                        st.write("Recording...")
+                        time.sleep(3)
+                    st.success("Recording completed")
+                    st.write("Error while loading the file")
 
         if model_type == "mfccs":
             em3 = st.sidebar.checkbox("3 emotions", True)
@@ -407,119 +408,117 @@ def main():
             #             st.write(fig, use_column_width=True)
             #     except Exception as e:
             #         st.error(f"Error {e}, model is not loaded")
+        elif website_menu == "Project description":
+            import pandas as pd
+            import plotly.express as px
+            st.title("Project description")
+            st.subheader("GitHub")
+            link = '[GitHub repository of the web-application]' \
+                '()'
+            st.markdown(link, unsafe_allow_html=True)
 
+            st.subheader("Theory")
+            link = '[Theory behind - Medium article]' \
+                '(https://talbaram3192.medium.com/classifying-emotions-using-audio-recordings-and-python-434e748a95eb)'
+            st.markdown(link + ":clap::clap::clap: Tal!", unsafe_allow_html=True)
+            with st.expander("See Wikipedia definition"):
+                components.iframe("https://en.wikipedia.org/wiki/Emotion_recognition",
+                                height=320, scrolling=True)
 
-    elif website_menu == "Project description":
-        import pandas as pd
-        import plotly.express as px
-        st.title("Project description")
-        st.subheader("GitHub")
-        link = '[GitHub repository of the web-application]' \
-               '()'
-        st.markdown(link, unsafe_allow_html=True)
+            st.subheader("Dataset")
+            txt = """
+                This web-application is a part of the final **Data Mining** project for **ITC Fellow Program 2020**. 
 
-        st.subheader("Theory")
-        link = '[Theory behind - Medium article]' \
-               '(https://talbaram3192.medium.com/classifying-emotions-using-audio-recordings-and-python-434e748a95eb)'
-        st.markdown(link + ":clap::clap::clap: Tal!", unsafe_allow_html=True)
-        with st.expander("See Wikipedia definition"):
-            components.iframe("https://en.wikipedia.org/wiki/Emotion_recognition",
-                              height=320, scrolling=True)
+                Datasets used in this project
+                * Jesin James, Li Tian,(**JL-Corpus**)
+                * Ryerson Audio-Visual Database of Emotional Speech and Song (**Ravdess**)
+                * Surrey Audio-Visual Expressed Emotion (**Savee**)
+                * MELD F.R.I.E.N.D.S dialogs (**MELD**)    
+                """
+            st.markdown(txt, unsafe_allow_html=True)
 
-        st.subheader("Dataset")
-        txt = """
-            This web-application is a part of the final **Data Mining** project for **ITC Fellow Program 2020**. 
+            df = pd.read_csv("df_audio.csv")
+            fig = px.violin(df, y="source", x="emotion4", color="actors", box=True, points="all", hover_data=df.columns)
+            st.plotly_chart(fig, use_container_width=True)
 
-            Datasets used in this project
-            * Jesin James, Li Tian,(**JL-Corpus**)
-            * Ryerson Audio-Visual Database of Emotional Speech and Song (**Ravdess**)
-            * Surrey Audio-Visual Expressed Emotion (**Savee**)
-            * MELD F.R.I.E.N.D.S dialogs (**MELD**)    
-            """
-        st.markdown(txt, unsafe_allow_html=True)
+            st.subheader("FYI")
+            st.write("Since we are currently using a free tier instance of AWS, "
+                    "we disabled mel-spec and ensemble models.\n\n"
+                    "If you want to try them we recommend to clone our GitHub repo")
+            st.code("git clone https://github.com/mustankap/staccato.git", language='bash')
 
-        df = pd.read_csv("df_audio.csv")
-        fig = px.violin(df, y="source", x="emotion4", color="actors", box=True, points="all", hover_data=df.columns)
-        st.plotly_chart(fig, use_container_width=True)
+            st.write("After that, just uncomment the relevant sections in the app.py file "
+                    "to use these models:")
 
-        st.subheader("FYI")
-        st.write("Since we are currently using a free tier instance of AWS, "
-                 "we disabled mel-spec and ensemble models.\n\n"
-                 "If you want to try them we recommend to clone our GitHub repo")
-        st.code("git clone https://github.com/mustankap/staccato.git", language='bash')
+        elif website_menu == "Our team":
+            st.subheader("Our team")
+            st.balloons()
+            col1, col2 = st.columns([3, 2])
+            with col1:
+                st.info("mustankap@gmail.com")
+                st.info("deepkarma001@gmail.com")
+                st.info("vedantk07@gmail.com")
+            with col2:
+                liimg = Image.open("images/LI-Logo.png")
+                st.image(liimg)
+                st.markdown(f""":speech_balloon: [Mustansir Kapasi](https://www.linkedin.com/in/mustankap)""",
+                            unsafe_allow_html=True)
+                st.markdown(f""":speech_balloon: [Arghyadeep Karmakar](https://www.linkedin.com/in/arghyadeep-k-14b06b15a/)""",
+                            unsafe_allow_html=True)
+                st.markdown(f""":speech_balloon: [Vedant Kokate](https://www.linkedin.com/in/vedant-kokate-723030182/)""",
+                            unsafe_allow_html=True)
 
-        st.write("After that, just uncomment the relevant sections in the app.py file "
-                 "to use these models:")
+        elif website_menu == "Leave feedback":
+            st.subheader("Leave feedback")
+            user_input = st.text_area("Your feedback is greatly appreciated")
+            user_name = st.selectbox("Choose your personality", ["checker1", "checker2", "checker3", "checker4"])
 
-    elif website_menu == "Our team":
-        st.subheader("Our team")
-        st.balloons()
-        col1, col2 = st.columns([3, 2])
-        with col1:
-            st.info("mustankap@gmail.com")
-            st.info("deepkarma001@gmail.com")
-            st.info("vedantk07@gmail.com")
-        with col2:
-            liimg = Image.open("images/LI-Logo.png")
-            st.image(liimg)
-            st.markdown(f""":speech_balloon: [Mustansir Kapasi](https://www.linkedin.com/in/mustankap)""",
-                        unsafe_allow_html=True)
-            st.markdown(f""":speech_balloon: [Arghyadeep Karmakar](https://www.linkedin.com/in/arghyadeep-k-14b06b15a/)""",
-                        unsafe_allow_html=True)
-            st.markdown(f""":speech_balloon: [Vedant Kokate](https://www.linkedin.com/in/vedant-kokate-723030182/)""",
-                        unsafe_allow_html=True)
+            if st.button("Submit"):
+                st.success(f"Message\n\"\"\"{user_input}\"\"\"\nwas sent")
 
-    elif website_menu == "Leave feedback":
-        st.subheader("Leave feedback")
-        user_input = st.text_area("Your feedback is greatly appreciated")
-        user_name = st.selectbox("Choose your personality", ["checker1", "checker2", "checker3", "checker4"])
+                if user_input == "log123456" and user_name == "checker4":
+                    with open("log0.txt", "r", encoding="utf8") as f:
+                        st.text(f.read())
+                elif user_input == "feedback123456" and user_name == "checker4":
+                    with open("log.txt", "r", encoding="utf8") as f:
+                        st.text(f.read())
+                else:
+                    log_file(user_name + " " + user_input)
+                    thankimg = Image.open("images/sticky.png")
+                    st.image(thankimg)
 
-        if st.button("Submit"):
-            st.success(f"Message\n\"\"\"{user_input}\"\"\"\nwas sent")
+        else:
+            import requests
+            import json
 
-            if user_input == "log123456" and user_name == "checker4":
-                with open("log0.txt", "r", encoding="utf8") as f:
-                    st.text(f.read())
-            elif user_input == "feedback123456" and user_name == "checker4":
-                with open("log.txt", "r", encoding="utf8") as f:
-                    st.text(f.read())
-            else:
-                log_file(user_name + " " + user_input)
-                thankimg = Image.open("images/sticky.png")
-                st.image(thankimg)
-
-    else:
-        import requests
-        import json
-
-        url = 'http://api.quotable.io/random'
-        if st.button("get random mood"):
-            with st.container():
-                col1, col2 = st.columns(2)
-                n = np.random.randint(1, 1000, 1)[0]
-                with col1:
-                    quotes = {"Good job and almost done": "checker1",
-                              "Great start!!": "checker2",
-                              "Please make corrections base on the following observation": "checker3",
-                              "DO NOT train with test data": "folk wisdom",
-                              "good work, but no docstrings": "checker4",
-                              "Well done!": "checker3",
-                              "For the sake of reproducibility, I recommend setting the random seed": "checker1"}
-                    if n % 5 == 0:
-                        a = np.random.choice(list(quotes.keys()), 1)[0]
-                        quote, author = a, quotes[a]
-                    else:
-                        try:
-                            r = requests.get(url=url)
-                            text = json.loads(r.text)
-                            quote, author = text['content'], text['author']
-                        except Exception as e:
+            url = 'http://api.quotable.io/random'
+            if st.button("get random mood"):
+                with st.container():
+                    col1, col2 = st.columns(2)
+                    n = np.random.randint(1, 1000, 1)[0]
+                    with col1:
+                        quotes = {"Good job and almost done": "checker1",
+                                "Great start!!": "checker2",
+                                "Please make corrections base on the following observation": "checker3",
+                                "DO NOT train with test data": "folk wisdom",
+                                "good work, but no docstrings": "checker4",
+                                "Well done!": "checker3",
+                                "For the sake of reproducibility, I recommend setting the random seed": "checker1"}
+                        if n % 5 == 0:
                             a = np.random.choice(list(quotes.keys()), 1)[0]
                             quote, author = a, quotes[a]
-                    st.markdown(f"## *{quote}*")
-                    st.markdown(f"### ***{author}***")
-                with col2:
-                    st.image(image=f"https://picsum.photos/800/600?random={n}")
+                        else:
+                            try:
+                                r = requests.get(url=url)
+                                text = json.loads(r.text)
+                                quote, author = text['content'], text['author']
+                            except Exception as e:
+                                a = np.random.choice(list(quotes.keys()), 1)[0]
+                                quote, author = a, quotes[a]
+                        st.markdown(f"## *{quote}*")
+                        st.markdown(f"### ***{author}***")
+                    with col2:
+                        st.image(image=f"https://picsum.photos/800/600?random={n}")
 
 
 if __name__ == '__main__':
