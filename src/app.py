@@ -196,7 +196,7 @@ def main():
                             audio_file = None
                             st.error(f"Error {e} - wrong format of the file. Try another .wav file.")
                     else:
-                        st.error("Unknown error")  
+                        st.error("Unknown error")
                 else:
                     if st.button("Try test file"):
                         wav, sr = librosa.load("test.wav", sr=44100)
@@ -426,12 +426,12 @@ def main():
 
         st.subheader("Dataset")
         txt = """
-            This web-application is a part of the final **Data Mining** project for **ITC Fellow Program 2020**. 
+            This web-application is a part of the final **Data Mining** project for **ITC Fellow Program 2020**.
             Datasets used in this project
             * Jesin James, Li Tian,(**JL-Corpus**)
             * Ryerson Audio-Visual Database of Emotional Speech and Song (**Ravdess**)
             * Surrey Audio-Visual Expressed Emotion (**Savee**)
-            * MELD F.R.I.E.N.D.S dialogs (**MELD**)    
+            * MELD F.R.I.E.N.D.S dialogs (**MELD**)
             """
         st.markdown(txt, unsafe_allow_html=True)
 
