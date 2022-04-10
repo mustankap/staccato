@@ -1,9 +1,6 @@
 - neutral
-<<<<<<< HEAD
-=======
 - assertive
 - encouraging
->>>>>>> JL-corpus
 - calm
 	- I don't think anything that bad can happen.
 	- Feel your feet on the ground. Notice where your legs are resting on the chair. The key is not to get stuck in your head
