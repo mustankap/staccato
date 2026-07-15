@@ -10,9 +10,10 @@ import streamlit.components.v1 as components
 import matplotlib.pyplot as plt
 from PIL import Image
 from melspec import plot_colored_polar, plot_melspec
+from settings import WAVE_OUTPUT_FILE
 
 # load models
-model = load_model("model3.h5")
+model = load_model("models/model3.h5")
 
 # constants
 starttime = datetime.now()
@@ -95,7 +96,7 @@ def get_melspec(audio):
 # @st.cache
 def get_mfccs(audio, limit):
     y, sr = librosa.load(audio)
-    a = librosa.feature.mfcc(y, sr=sr, n_mfcc=40)
+    a = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=40)
     if a.shape[1] > limit:
         mfccs = a[:, :limit]
     elif a.shape[1] < limit:
@@ -104,19 +105,19 @@ def get_mfccs(audio, limit):
     return mfccs
 
 
-@st.cache
+@st.cache_data
 def get_title(predictions, categories=CAT6):
     title = f"Detected emotion: {categories[predictions.argmax()]} \
     - {predictions.max() * 100:.2f}%"
     return title
 
 
-@st.cache
+@st.cache_data
 def color_dict(coldict=COLOR_DICT):
     return COLOR_DICT
 
 
-@st.cache
+@st.cache_data
 def plot_polar(fig, predictions=TEST_PRED, categories=TEST_CAT,
                title="TEST", colors=COLOR_DICT):
     # color_sector = "grey"
@@ -160,12 +161,14 @@ def main():
     st.sidebar.subheader("Project Staccato")
     website_menu = st.sidebar.selectbox("Menu", ("Emotion Recognition", "Project description", "Our team",
                                                  "Leave feedback", "Relax"))
-    st.set_option('deprecation.showfileUploaderEncoding', False)
+    # st.set_option('deprecation.showfileUploaderEncoding', False)
 
     if website_menu == "Emotion Recognition":
         st.sidebar.subheader("Model")
         model_type = st.sidebar.selectbox("How would you like to predict?", ("mfccs", "mel-specs"))
         em3 = em6 = em7 = gender = False
+        audio_file = None
+        path = None
         st.sidebar.subheader("Settings")
 
         st.markdown("## Upload the file")
@@ -189,7 +192,7 @@ def main():
                         try:
                             wav, sr = librosa.load(path, sr=44100)
                             Xdb = get_melspec(path)[1]
-                            mfccs = librosa.feature.mfcc(wav, sr=sr)
+                            mfccs = librosa.feature.mfcc(y=wav, sr=sr)
                             # # display audio
                             # st.audio(audio_file, format='audio/wav', start_time=0)
                         except Exception as e:
@@ -201,31 +204,40 @@ def main():
                     if st.button("Try test file"):
                         wav, sr = librosa.load("test.wav", sr=44100)
                         Xdb = get_melspec("test.wav")[1]
-                        mfccs = librosa.feature.mfcc(wav, sr=sr)
+                        mfccs = librosa.feature.mfcc(y=wav, sr=sr)
                         # display audio
                         st.audio("test.wav", format='audio/wav', start_time=0)
                         path = "test.wav"
                         audio_file = "test"
             with col2:
-                DURATION = 60
-                if st.button('Record'):
-                    with st.spinner(f'Max Length - {DURATION} seconds ....'):
-                        sound.record()
-                    st.success("Recording completed")
+                audio_input = st.audio_input("Record voice")
+                
+                if audio_input is not None:
+                    # Save the audio bytes to WAVE_OUTPUT_FILE
+                    dirname = os.path.dirname(WAVE_OUTPUT_FILE)
+                    if dirname and not os.path.exists(dirname):
+                        os.makedirs(dirname, exist_ok=True)
+                    with open(WAVE_OUTPUT_FILE, "wb") as f:
+                        f.write(audio_input.getvalue())
+                    st.session_state["analyze_recording"] = True
+                else:
+                    st.session_state["analyze_recording"] = False
 
-                if st.button('Play'):
-                    # sound.play()
-                    try:
-                        audio_file = open(WAVE_OUTPUT_FILE, 'rb')
-                        audio_bytes = audio_file.read()
-                        st.audio(audio_bytes, format='audio/wav')
-                    except:
-                        st.write("Please record sound first")
+                if audio_file is not None:
+                    st.session_state["analyze_recording"] = False
+
+                if audio_file is None and st.session_state.get("analyze_recording", False) and os.path.exists(WAVE_OUTPUT_FILE):
+                    path = WAVE_OUTPUT_FILE
+                    audio_file = "recorded"
+                    wav, sr = librosa.load(path, sr=44100)
+                    Xdb = get_melspec(path)[1]
+                    mfccs = librosa.feature.mfcc(y=wav, sr=sr)
+
                 if audio_file is not None:
                     fig = plt.figure(figsize=(10, 2))
                     fig.set_facecolor('#d1d1e0')
                     plt.title("Wave-form")
-                    librosa.display.waveplot(wav, sr=44100)
+                    librosa.display.waveshow(wav, sr=44100)
                     plt.gca().axes.get_yaxis().set_visible(False)
                     plt.gca().axes.get_xaxis().set_visible(False)
                     plt.gca().axes.spines["right"].set_visible(False)
@@ -289,7 +301,7 @@ def main():
 
         if audio_file is not None:
             st.markdown("## Analyzing...")
-            if not audio_file == "test":
+            if hasattr(audio_file, "name"):
                 st.sidebar.subheader("Audio file")
                 file_details = {"Filename": audio_file.name, "FileSize": audio_file.size}
                 st.sidebar.write(file_details)
@@ -351,7 +363,7 @@ def main():
                             st.write(fig2)
                     with col3:
                         if em7:
-                            model_ = load_model("model4.h5")
+                            model_ = load_model("models/model4.h5")
                             mfccs_ = get_mfccs(path, model_.input_shape[-2])
                             mfccs_ = mfccs_.T.reshape(1, *mfccs_.T.shape)
                             pred_ = model_.predict(mfccs_)[0]
@@ -366,7 +378,7 @@ def main():
                     with col4:
                         if gender:
                             with st.spinner('Wait for it...'):
-                                gmodel = load_model("model_mw.h5")
+                                gmodel = load_model("models/model_mw.h5")
                                 gmfccs = get_mfccs(path, gmodel.input_shape[-1])
                                 gmfccs = gmfccs.reshape(1, *gmfccs.shape)
                                 gpred = gmodel.predict(gmfccs)[0]
